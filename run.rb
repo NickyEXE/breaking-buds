@@ -1,6 +1,6 @@
 require_relative "config/environment.rb"
 
-BreakingBadSearch.new
+cli = CLI.new
 
 
 binding.pry

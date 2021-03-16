@@ -17,4 +17,8 @@ class Character
   def self.all
     @@all
   end
+
+  def self.find_by_name(name)
+    self.all.find{|char| char.name == name}
+  end
 end
