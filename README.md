@@ -8,6 +8,10 @@ Start by using `bundle init` and then you can add gems to the gemfile.
 
 Include the bundler by adding `require 'bundler'` and `Bundler.require` to the top of your code.
 
+### TTY-Prompt
+
+Because `gets.strip` is so 1982, get up to 1985 with: https://github.com/piotrmurach/tty-prompt
+
 ### Deliverables
 We're going to create an app to allow Users to give supportive comments to different Breaking Bad Characters.
 
