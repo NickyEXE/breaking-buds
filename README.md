@@ -1,5 +1,11 @@
 # Breaking Better: A Breaking Bad Support Group For Breaking Buds
 
+### To use this app
+
+First run `bundle install`.
+
+Then, start the app with `ruby run.rb`
+
 ### Implementing Bundler
 
 Bundler allows you to denote which gems the app uses and lock your specific version. Then, it gives others a command to automatically install those gems. It's a great gem version tracker for large apps.
@@ -15,10 +21,10 @@ Because `gets.strip` is so 1982, get up to 1985 with: https://github.com/piotrmu
 ### Deliverables
 We're going to create an app to allow Users to give supportive comments to different Breaking Bad Characters.
 
-> Create an API service class
+<!-- > Create an API service class
 > Create a character class
 > Create a CLI app that populates the characters, then allows us to see all their names
-> Allow us to see more details on each character
+> Allow us to see more details on each character -->
 > Allow us to add a message to the character
 > Allow us to login
 > Associate messages with user
