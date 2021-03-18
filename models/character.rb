@@ -34,4 +34,8 @@ class Character
     puts "Played By: #{self.actor}"
   end
 
+  def add_message(content)
+    Message.new(content, self)
+  end
+
 end
