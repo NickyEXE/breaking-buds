@@ -29,11 +29,26 @@ class CLI
     character_menu
   end
 
+  def prompt_message
+    content = @prompt.ask("What would you like to tell #{character.name}?")
+    character.add_message(content)
+    puts "You wrote: #{content}"
+  end
+
   def character_menu
-    input = @prompt.enum_select("What would you like to do?", ["See Messages", "See #{character.name}'s Details", "See All Characters", "Exit"])
+    input = @prompt.enum_select("What would you like to do?", [
+      "See Messages",
+      "Add Message",
+      "See #{character.name}'s Details",
+      "See All Characters",
+      "Exit"
+    ])
       case input
       when "See Messages"
         character.print_messages
+        character_menu
+      when "Add Message"
+        prompt_message
         character_menu
       when "See #{character.name}'s Details"
         character.print_details
