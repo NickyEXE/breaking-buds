@@ -1,5 +1,6 @@
 require 'bundler'
 Bundler.require
+Dotenv.load
 
 require_relative "../models/cli.rb"
 require_relative "../models/breaking_bad_api.rb"

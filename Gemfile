@@ -9,6 +9,8 @@ gem "pry"
 
 gem "faker", "~> 2.17"
 
+gem 'dotenv'
+
 gem "tty-prompt", "~> 0.23.0"
 
 gem "httparty", "~> 0.18.1"
