@@ -1,5 +1,7 @@
 class CLI
 
+  attr_reader :character
+
   def initialize
     @prompt = TTY::Prompt.new
     welcome
@@ -22,13 +24,25 @@ class CLI
 
   def show_characters(characters)
     input = @prompt.select("Which character would you like to view?", characters.map{|character| character.name})
-    character = Character.find_by_name(input)
-    character_menu(character)
+    @character = Character.find_by_name(input)
+    character.print_details
+    character_menu
   end
 
-  def character_menu(character)
-    character.print_details
-    menu
+  def character_menu
+    input = @prompt.enum_select("What would you like to do?", ["See Messages", "See #{character.name}'s Details", "See All Characters", "Exit"])
+      case input
+      when "See Messages"
+        puts "Here's where we'd show messages"
+        character_menu
+      when "See #{character.name}'s Details"
+        character.print_details
+        character_menu
+      when "See All Characters"
+        show_characters(Character.all)
+      when "Exit"
+        logout
+      end
   end
 
   def logout
