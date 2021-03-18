@@ -1,6 +1,6 @@
 class CLI
 
-  attr_reader :user
+  attr_reader :user, :character
 
   def initialize
     @prompt = TTY::Prompt.new
@@ -13,6 +13,8 @@ class CLI
   end
 
   def menu
+    # clear stored character
+    @character = nil
     if @user
       puts "Welcome, #{user.username}"
       input = @prompt.enum_select("What would you like to do?", ["See All Characters", "See Your Messages", "Logout"])
@@ -43,12 +45,12 @@ class CLI
 
   def show_characters(characters)
     input = @prompt.select("Which character would you like to view?", characters.map{|character| character.name})
-    character = Character.find_by_name(input)
+    @character = Character.find_by_name(input)
     character.print_details
-    character_menu(character)
+    character_menu
   end
 
-  def character_menu(character)
+  def character_menu
     input = @prompt.enum_select("What would you like to do?", [
       "Send #{character.name} a message",
       "See #{character.name}'s messages",
@@ -57,9 +59,9 @@ class CLI
     ])
     case input
     when "Send #{character.name} a message"
-      add_message(character)
+      add_message
     when "See #{character.name}'s messages"
-      character_messages(character)
+      character_messages
     when "Go back to main menu"
       menu
     when "Logout"
@@ -73,18 +75,18 @@ class CLI
     menu
   end
 
-  def add_message(character)
+  def add_message
     message = @prompt.ask("What would you like to tell #{character.name}?")
     character.write_message(message, user)
     puts "You wrote: #{message}"
-    character_messages(character)
+    character_messages
   end
 
-  def character_messages(character)
+  def character_messages
     puts "People have told #{character.name}:"
     character.print_messages
     sleep(2)
-    character_menu(character)
+    character_menu
   end
 
   def logout
