@@ -38,4 +38,18 @@ class Character
     Message.new(content, self)
   end
 
+  def messages
+    Message.all.select{|message| message.character == self}
+  end
+
+  def print_messages
+    if messages.any?
+      messages.each_with_index do |message, i|
+        puts "#{i + 1}. #{message.content}"
+      end
+    else
+      puts "#{name} has no messages yet! Be the first to add one!"
+    end
+  end
+
 end

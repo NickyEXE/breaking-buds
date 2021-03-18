@@ -33,7 +33,7 @@ class CLI
     input = @prompt.enum_select("What would you like to do?", ["See Messages", "See #{character.name}'s Details", "See All Characters", "Exit"])
       case input
       when "See Messages"
-        puts "Here's where we'd show messages"
+        character.print_messages
         character_menu
       when "See #{character.name}'s Details"
         character.print_details
