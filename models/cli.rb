@@ -15,10 +15,12 @@ class CLI
   def menu
     if @user
       puts "Welcome, #{user.username}"
-      input = @prompt.enum_select("What would you like to do?", ["See All Characters", "Logout"])
+      input = @prompt.enum_select("What would you like to do?", ["See All Characters", "See Your Messages", "Logout"])
       case input
       when "See All Characters"
         show_characters(Character.all)
+      when "See Your Messages"
+        show_user_messages
       when "Logout"
         logout
       end
@@ -63,6 +65,12 @@ class CLI
     when "Logout"
       logout
     end
+  end
+
+  def show_user_messages
+    user.print_messages
+    sleep(2)
+    menu
   end
 
   def add_message(character)

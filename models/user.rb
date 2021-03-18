@@ -23,4 +23,19 @@ class User
     return user
   end
 
+  def messages
+    Message.all.select{|message| message.user == self}
+  end
+
+  def print_messages
+    if messages.any?
+      puts "You have written the following messages:"
+      messages.each do |message|
+        puts "To #{message.character.name}: #{message.message}"
+      end
+    else
+      puts "You haven't written a message yet!"
+    end
+  end
+
 end
