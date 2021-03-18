@@ -13,12 +13,19 @@ class CLI
   end
 
   def menu
-    input = @prompt.enum_select("What would you like to do?", ["See All Characters", "Exit"])
-    case input
-    when "See All Characters"
-      show_characters(Character.all)
-    when "Exit"
-      logout
+    if @user
+      input = @prompt.enum_select("What would you like to do, #{@user.username}?", ["See All Characters", "Logout", "Exit"])
+      case input
+      when "See All Characters"
+        show_characters(Character.all)
+      when "Logout"
+        logout
+      when "Exit"
+        exit_app
+      end
+    else
+      prompt_login
+      menu
     end
   end
 
@@ -35,12 +42,18 @@ class CLI
     puts "You wrote: #{content}"
   end
 
+  def prompt_login
+    username = @prompt.ask("What's your username?")
+    @user = User.find_or_create(username)
+  end
+
   def character_menu
     input = @prompt.enum_select("What would you like to do?", [
       "See Messages",
       "Add Message",
       "See #{character.name}'s Details",
       "See All Characters",
+      "Logout",
       "Exit"
     ])
       case input
@@ -55,12 +68,19 @@ class CLI
         character_menu
       when "See All Characters"
         show_characters(Character.all)
-      when "Exit"
+      when "Logout"
         logout
+      when "Exit"
+        exit_app
       end
   end
 
   def logout
+    @user = nil
+    menu
+  end
+
+  def exit_app
     puts "Thanks for helping our Breaking Bad Besties get Back on their Feet"
   end
 
