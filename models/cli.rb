@@ -8,6 +8,7 @@ class CLI
 
   def welcome
     puts "Welcome to Breaking Buddies, a Support Mechanism for Breaking Bad Baddies"
+    puts "hello"
   end
 
   def menu
