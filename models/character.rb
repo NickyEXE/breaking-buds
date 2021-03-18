@@ -25,6 +25,14 @@ class Character
     self.all.find{|character| character.name == name}
   end
 
+  def write_message(message)
+    Message.new(message, self)
+  end
+
+  def messages
+    Message.all.select{|message| message.character == self}
+  end
+
   def print_details
     puts self.name
     puts "Nickname: #{self.nickname}"
@@ -32,6 +40,16 @@ class Character
     puts "Occupation: #{self.occupation.join(", ")}"
     puts "Status: #{self.status}"
     puts "Played By: #{self.actor}"
+  end
+
+  def print_messages
+    if messages.any?
+      messages.each_with_index do |message, i|
+        puts "#{i+1}. #{message.message}"
+      end
+    else
+      puts "No one has written #{name} a message yet! Be the first!"
+    end
   end
 
 end
