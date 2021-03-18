@@ -1,5 +1,5 @@
 require_relative 'config/environment.rb'
 
-binding.pry
+# binding.pry
 
-# CLI.new
+CLI.new

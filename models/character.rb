@@ -25,8 +25,8 @@ class Character
     self.all.find{|character| character.name == name}
   end
 
-  def write_message(message)
-    Message.new(message, self)
+  def write_message(message, user)
+    Message.new(message, self, user)
   end
 
   def messages
@@ -44,8 +44,8 @@ class Character
 
   def print_messages
     if messages.any?
-      messages.each_with_index do |message, i|
-        puts "#{i+1}. #{message.message}"
+      messages.each do |message|
+        puts "#{message.username}: #{message.message}"
       end
     else
       puts "No one has written #{name} a message yet! Be the first!"

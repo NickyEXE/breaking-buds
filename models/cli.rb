@@ -1,5 +1,7 @@
 class CLI
 
+  attr_reader :user
+
   def initialize
     @prompt = TTY::Prompt.new
     welcome
@@ -11,13 +13,30 @@ class CLI
   end
 
   def menu
-    input = @prompt.enum_select("What would you like to do?", ["See All Characters", "Exit"])
-    case input
-    when "See All Characters"
-      show_characters(Character.all)
-    when "Exit"
-      logout
+    if @user
+      puts "Welcome, #{user.username}"
+      input = @prompt.enum_select("What would you like to do?", ["See All Characters", "Logout"])
+      case input
+      when "See All Characters"
+        show_characters(Character.all)
+      when "Logout"
+        logout
+      end
+    else
+      input = @prompt.enum_select("What would you like to do?", ["Login", "Exit"])
+        case input
+        when "Login"
+          login
+        when "Exit"
+          close_application
+        end
     end
+  end
+
+  def login
+    username = @prompt.ask("What's your username?")
+    @user = User.find_or_create_by_username(username)
+    menu
   end
 
   def show_characters(characters)
@@ -32,7 +51,7 @@ class CLI
       "Send #{character.name} a message",
       "See #{character.name}'s messages",
       "Go back to main menu",
-      "Exit"
+      "Logout"
     ])
     case input
     when "Send #{character.name} a message"
@@ -41,14 +60,14 @@ class CLI
       character_messages(character)
     when "Go back to main menu"
       menu
-    when "Exit"
+    when "Logout"
       logout
     end
   end
 
   def add_message(character)
     message = @prompt.ask("What would you like to tell #{character.name}?")
-    character.write_message(message)
+    character.write_message(message, user)
     puts "You wrote: #{message}"
     character_messages(character)
   end
@@ -62,6 +81,12 @@ class CLI
 
   def logout
     puts "Thanks for helping our Breaking Bad Besties get Back on their Feet"
+    @user = nil
+    menu
+  end
+
+  def close_application
+    puts "See you later!"
   end
 
 end
