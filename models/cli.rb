@@ -14,10 +14,18 @@ class CLI
 
   def menu
     if @user
-      input = @prompt.enum_select("What would you like to do, #{@user.username}?", ["See All Characters", "Logout", "Exit"])
+      input = @prompt.enum_select("What would you like to do, #{@user.username}?", [
+        "See All Characters",
+        "See Your Messages",
+        "Logout",
+        "Exit"
+      ])
       case input
       when "See All Characters"
         show_characters(Character.all)
+      when "See Your Messages"
+        user.print_messages
+        menu
       when "Logout"
         logout
       when "Exit"
@@ -53,6 +61,7 @@ class CLI
       "Add Message",
       "See #{character.name}'s Details",
       "See All Characters",
+      "Main Menu",
       "Logout",
       "Exit"
     ])
@@ -68,6 +77,8 @@ class CLI
         character_menu
       when "See All Characters"
         show_characters(Character.all)
+      when "Main Menu"
+        menu
       when "Logout"
         logout
       when "Exit"
