@@ -26,8 +26,14 @@ class User
     self.find_by_username(username) || self.create(username)
   end
 
+  # has many messages
   def messages
     Message.all.select{|message| message.user == self}
+  end
+
+  # has many characters through messages
+  def characters
+    messages.map{|message| message.character}.uniq
   end
 
   def print_messages
