@@ -17,6 +17,7 @@ class CLI
       input = @prompt.enum_select("What would you like to do, #{@user.username}?", [
         "See All Characters",
         "See Your Messages",
+        "See The Characters You've Messaged",
         "Logout",
         "Exit"
       ])
@@ -26,6 +27,8 @@ class CLI
       when "See Your Messages"
         user.print_messages
         menu
+      when "See The Characters You've Messaged"
+        show_user_characters
       when "Logout"
         logout
       when "Exit"
@@ -42,6 +45,15 @@ class CLI
     @character = Character.find_by_name(input)
     character.print_details
     character_menu
+  end
+
+  def show_user_characters
+    if user.characters.any?
+      show_characters(user.characters)
+    else
+      puts "You haven't written to any of the characters!"
+      menu
+    end
   end
 
   def prompt_message
