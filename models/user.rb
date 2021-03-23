@@ -26,4 +26,14 @@ class User
     self.find_by_username(username) || self.create(username)
   end
 
+  def messages
+    Message.all.select{|message| message.user == self}
+  end
+
+  def print_messages
+    messages.each do |message|
+      puts "To #{message.character_name}: #{message.content}"
+    end
+  end
+
 end

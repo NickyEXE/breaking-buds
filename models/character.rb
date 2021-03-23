@@ -44,8 +44,8 @@ class Character
 
   def print_messages
     if messages.any?
-      messages.each_with_index do |message, i|
-        puts "#{i + 1}. #{message.content}"
+      messages.each do |message|
+        puts "#{message.username}: #{message.content}"
       end
     else
       puts "#{name} has no messages yet! Be the first to add one!"

@@ -13,4 +13,12 @@ class Message
     @@all
   end
 
+  def username
+    user.username
+  end
+
+  def character_name
+    character.name
+  end
+
 end
