@@ -22,7 +22,7 @@ Because `gets.strip` is so 1982, get up to 1985 with: https://github.com/piotrmu
 
 Rake allows you to define ruby tasks to initiate from the command line. To use it, first make sure you have Rake installed with `gem install rake`.
 
-After this, create a file called `Rakefile` (no .rb necessaary) in your root directory. After this, rake tasks can be defined like this:
+After this, create a file called `Rakefile` (no .rb necessary) in your root directory. After this, rake tasks can be defined like this:
 
 ```ruby
 task :say_hi do
