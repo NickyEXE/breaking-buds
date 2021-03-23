@@ -1,6 +1,6 @@
 class CLI
 
-  attr_reader :character
+  attr_reader :character, :user
 
   def initialize
     @prompt = TTY::Prompt.new
@@ -38,7 +38,7 @@ class CLI
 
   def prompt_message
     content = @prompt.ask("What would you like to tell #{character.name}?")
-    character.add_message(content)
+    add_message(content)
     puts "You wrote: #{content}"
   end
 
@@ -82,6 +82,12 @@ class CLI
 
   def exit_app
     puts "Thanks for helping our Breaking Bad Besties get Back on their Feet"
+  end
+
+  private
+
+  def add_message(content)
+    character.add_message(content, user)
   end
 
 end

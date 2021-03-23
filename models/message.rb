@@ -2,10 +2,10 @@ class Message
 
   @@all = []
 
-  attr_reader :content, :character
+  attr_reader :content, :character, :user
 
-  def initialize(content, character)
-    @content, @character = content, character
+  def initialize(content, character, user)
+    @content, @character, @user = content, character, user
     @@all << self
   end
 
