@@ -42,6 +42,25 @@ end
 
 Running `rake say_bye` in the console will now puts "hi" and then puts "bye".
 
+### Creating a run file with bin
+
+Using bin is a common method to allow us to run our executable without calling `ruby` in our terminal.
+
+Properly set up, it will allow you to run your code by simply writing `bin/run` in your terminal.
+
+To make your run file a bin file, create a directory called `bin` in your root directory. Inside it, create a file with the name that you want to use to run it. For example, if I create a file named `batman`, I will eventually be able to run it with `bin/batman`. You do not need to add a `.rb`.
+
+A bin file should start with a shebang statement to let your computer know what language to use to run it. It is usually this: `#!/usr/bin/env ruby`
+
+Afterwards, treat it as a regular ruby file. Any ruby code in the bin file with a proper shebang statement should be runable from your main directory as `bin/batman` (or whatever you named the file.)
+
+If your VSCode doesn't recognize it as Ruby and you want to see your normal color highlighting, hit the portion that says something like "Plain Text" at the bottom right corner of the screen.
+
+If, for some reason, you run `bin/[YOUR FILENAME]` and get "Permission denied", you can give it write access with the following code in your terminal:
+```chmod +x bin/[YOUR FILENAME]```
+
+Alternatively, you can run it by calling `ruby bin/[YOUR FILENAME]`.
+
 ### Deliverables
 We're going to create an app to allow Users to give supportive comments to different Breaking Bad Characters.
 
